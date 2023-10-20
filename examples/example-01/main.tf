@@ -11,14 +11,9 @@ resource "local_file" "config" {
   filename = "config.json"
   content  = <<EOF
 {
-    "string": "hello",
-    "bool": true,
-    "int": 1,
-    "list": [
-        1,
-        2,
-        3
-    ]
+    "endpoint": "${var.config_url}",
+    "port": "${var.port}",
+    "service": "${var.service_name}"
 }
 EOF
 }

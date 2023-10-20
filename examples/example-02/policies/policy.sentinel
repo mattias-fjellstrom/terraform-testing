@@ -1,0 +1,14 @@
+import "tfplan/v2" as tfplan
+
+// filter out storage accounts that are created or updated
+storageAccounts = filter tfplan.resource_changes as _, resourceChange {
+	resourceChange.type is "azurerm_storage_account" and
+		(resourceChange.change.actions contains "create" or
+			resourceChange.change.actions contains "update")
+}
+
+main = rule {
+	all storageAccounts as _, storageAccount {
+		storageAccount.change.after.public_network_access_enabled is false
+	}
+}

@@ -1,1 +1,4 @@
 .terraform
+.sentinel
+terraform.tfstate
+terraform.tfstate.backup
